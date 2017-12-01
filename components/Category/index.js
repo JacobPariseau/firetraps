@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         marginBottom: 10,
-        backgroundColor: '#EF6C00'
+        backgroundColor: '#FFE0B2',
+        borderWidth: 10,
+        borderColor: "#795548",
+        shadowOffset: {width: 0, height: 10},
+        shadowRadius: 5
     },
 });

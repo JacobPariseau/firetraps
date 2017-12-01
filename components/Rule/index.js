@@ -109,10 +109,14 @@ const styles = StyleSheet.create({
     rule: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#BF360C',
+        backgroundColor: '#FFE0B2',
+        borderWidth: 4,
+        borderColor: "#795548",
+        shadowOffset: {width: 0, height: 10},
+        shadowRadius: 5
     },
     body: {
-        color: '#e3e3dd',
+        color: '#251505',
         fontSize: 20
     }
 });
