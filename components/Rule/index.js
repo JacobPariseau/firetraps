@@ -6,7 +6,7 @@ import {
     PanResponder,
     Animated,
     Dimensions,
-    TouchableOpacity
+    TouchableNativeFeedback
 } from 'react-native';
 
 import rules from '../../data/rules.js';
@@ -60,12 +60,12 @@ export default class Rule extends Component {
                         this.reverse = false;
                         this.launch = false;
                         this.right = false;
-                        this.state.pan.setOffset({x: 0, y: 0});
-                        this.state.pan.setValue({x: 0, y: 0});
+                        this.state.pan.setValue({x: -this.state._value.x, y: this.state._value.y});
+                        Animated.spring(this.state.pan,{toValue: {x: 0, y: 0}}).start();
                         this.setState(prevState => {
                             return {
                                 pan: prevState.pan,
-                                _value: {x: 0, y: 0},
+                                _value: prevState._value,
                                 text: newRuleText()
                             };
                         });
@@ -73,7 +73,7 @@ export default class Rule extends Component {
                 }
 
                 if(this.launch) {
-                    Animated.spring(this.state.pan,{toValue: {x: (this.right ? 4000 : -4000), y: 0}}).start();
+                    Animated.spring(this.state.pan,{toValue: {x: (this.right ? 3000 : -3000), y: 0}}).start();
                     return;
                 }
 
@@ -97,9 +97,9 @@ export default class Rule extends Component {
     render() {
         return (
             <Animated.View {...this.panResponder.panHandlers} style={{left: this.state.pan.x, flexDirection: "row"}}>
-                <TouchableOpacity style={styles.rule}>
+                <View style={styles.rule}>
                     <Text style={styles.body}>...{this.state.text}</Text>
-                </TouchableOpacity>
+                </View>
             </Animated.View>
         );
     }
@@ -109,14 +109,15 @@ const styles = StyleSheet.create({
     rule: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#FFE0B2',
-        borderWidth: 4,
-        borderColor: "#795548",
+        backgroundColor: '#FFB74D',
         shadowOffset: {width: 0, height: 10},
-        shadowRadius: 5
+        shadowRadius: 5,
+        borderRadius: 6,
+        elevation: 3
     },
     body: {
-        color: '#251505',
-        fontSize: 20
+        color: '#453525',
+        fontSize: 22,
+        fontFamily: 'ComicRelief'
     }
 });

@@ -54,3 +54,6 @@ buck-out/
 
 android
 ios
+
+res
+data/rules.js
